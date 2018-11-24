@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Movie /> with no poster 1`] = `
+<div
+  data-testid="movie"
+>
+  <span
+    data-testid="movie-title"
+  >
+    Hackers (1995)
+  </span>
+</div>
+`;
+
+exports[`<Movie /> with no release date 1`] = `
+<div
+  data-testid="movie"
+>
+  <img
+    alt="Hackers"
+    data-testid="movie-poster"
+    src="http://image.tmdb.org/t/p/w185/image.jpg"
+  />
+</div>
+`;
+
+exports[`<Movie /> with poster and release date 1`] = `
+<div
+  data-testid="movie"
+>
+  <img
+    alt="Hackers (1995)"
+    data-testid="movie-poster"
+    src="http://image.tmdb.org/t/p/w185/image.jpg"
+  />
+</div>
+`;
