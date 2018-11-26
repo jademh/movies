@@ -18,7 +18,6 @@ const allStoreEnhancers = compose(
 const store = createStore(
   rootReducer,
   {
-    user: 'Jade',
     movies: [],
   },
   allStoreEnhancers
