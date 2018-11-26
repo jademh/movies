@@ -1,44 +1,29 @@
 import React, { Component } from 'react';
-import MovieList from './movielist/MovieList';
+import MovieListWrapper from './movielist/MovieListWrapper';
 import './App.css';
-
 import { connect } from 'react-redux';
-import { updateUser } from './actions/userActions';
-import { fetchMovies } from './actions/moviesActions';
+import { fetchMovies } from './actions/movies';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.onUpdateUser = this.onUpdateUser.bind(this);
-  }
+export class App extends Component {
 
   componentDidMount() {
     this.props.onFetchMovies();
   }
 
-  onUpdateUser(event) {
-    this.props.onUpdateUser(event.target.value);
-  }
-
   render() {
-    console.log(this.props);
     return (
       <div className="App">
-        <MovieList movies={this.props.movies}/>
-        <input onChange={this.onUpdateUser} />
-        <span>{this.props.user}</span>
+        <MovieListWrapper />
       </div>
     );
   }
 }
 
 const mapStateToProps =  state => ({
-  user: state.user,
   movies: state.movies,
 })
 
 const mapActionsToProps = {
-  onUpdateUser: updateUser,
   onFetchMovies: fetchMovies,
 };
 

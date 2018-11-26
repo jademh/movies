@@ -3,17 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { applyMiddleware, compose, combineReducers, createStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
+import rootReducer from './reducers';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import userReducer from './reducers/userReducer';
-import moviesReducer from './reducers/moviesReducer';
-require('dotenv').config();
 
-const allReducers = combineReducers({
-  user: userReducer,
-  movies: moviesReducer,
-});
+require('dotenv').config();
 
 const allStoreEnhancers = compose(
   applyMiddleware(thunk),
@@ -21,7 +16,7 @@ const allStoreEnhancers = compose(
 );
 
 const store = createStore(
-  allReducers,
+  rootReducer,
   {
     user: 'Jade',
     movies: [],

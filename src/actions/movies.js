@@ -1,36 +1,31 @@
-export const UPDATE_MOVIES = 'movies:update';
-export const SHOW_ERROR = 'movies:showError';
-export const TOGGLE_WATCHED = 'movies:toggleWatched';
-export const ALL_UNWATCHED = 'movies:markAllUnwatched';
-
-export function updateMovies(movies) {
+export const updateMovies = (movies) => {
   return {
-    type: UPDATE_MOVIES,
+    type: 'UPDATE_MOVIES',
     movies
   }
 }
 
-export function toggleMovie(id) {
+export const toggleMovie = (id) => {
   return {
-    type: TOGGLE_WATCHED,
+    type: 'TOGGLE_MOVIE_WATCHED',
     id
   }
 }
 
-export function markAllUnwatched() {
+export const markAllUnwatched = () => {
   return {
-    type: ALL_UNWATCHED,
+    type: 'MOVIES_ALL_UNWATCHED',
   }
 }
 
-export function showError() {
+export const showError = () => {
   return {
-    type: SHOW_ERROR,
+    type: 'MOVIE_FETCH_ERROR',
     payload: 'error'
   }
 }
 
-export function fetchMovies() {
+export const fetchMovies = () => {
   return dispatch => {
     fetchPage()
     .then((movies) => {
@@ -44,7 +39,7 @@ export function fetchMovies() {
   }
 }
 
-function fetchPage(pageNumber = 1, results = []) {
+const fetchPage = (pageNumber = 1, results = []) => {
   //lilo
   const personId = 49265;
   //tyra

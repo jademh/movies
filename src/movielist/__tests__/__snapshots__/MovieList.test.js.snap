@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<MovieList /> 0 length 1`] = `
+<div
+  data-testid="loading"
+>
+  Loading...
+</div>
+`;
+
 exports[`<MovieList /> 1`] = `
 <div>
   <h1>
@@ -28,7 +36,7 @@ exports[`<MovieList /> 1`] = `
   <button
     data-testid="movies-undo"
   >
-    Undo
+    Mark all Unwatched
   </button>
   <ul
     class="movie-list"

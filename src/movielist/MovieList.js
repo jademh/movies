@@ -1,31 +1,17 @@
 import React, { Component } from 'react';
 import Movie from './Movie';
 import { calculatePercentage } from '../helpers/math';
-import { connect } from 'react-redux';
-import { toggleMovie, markAllUnwatched } from '../actions/moviesActions';
 
-class MovieList extends Component {
-  constructor(props) {
-    super(props);
-    this.markUnwatched = this.markUnwatched.bind(this);
-  }
-
-
-  toggleMovie(id) {
-    const movies = [...this.state.movies];
-    const movie = movies.find((movie) => movie.id === id);
-    movie.watched = !movie.watched;
-    this.setState({movies});
-  }
-
-  markUnwatched() {
-    const movies = [...this.statproe.movies];
-    movies.forEach(movie => movie.watched = false);
-    this.setState({movies});
-  }
+export class MovieList extends Component {
 
   render() {
-      const movies = this.props.movies;
+
+      const {
+        movies,
+        markAllUnwatched,
+        toggleMovie
+      } = this.props;
+
       const totalMovies = movies.length;
       const seenMovies = movies.filter(movie => movie.watched).length;
       const percentage = calculatePercentage(seenMovies, totalMovies);
@@ -39,7 +25,7 @@ class MovieList extends Component {
               <span> ... </span>
               <span data-testid="movies-percentage">{percentage}</span>
             </h1>
-            <button data-testid="movies-undo" onClick={this.props.onMarkAllUnwatched}>Mark all Unwatched</button>
+            <button data-testid="movies-undo" onClick={markAllUnwatched}>Mark all Unwatched</button>
             <ul className="movie-list">
             {movies.map((movie) => {
               return (
@@ -48,7 +34,7 @@ class MovieList extends Component {
                   className={`movie-list_item ${movie.watched ? 'st-watched' : ''}`}>
                   <button
                     data-testid="movie-button"
-                    onClick={() => this.props.onToggleMovie(movie.id)}
+                    onClick={() => toggleMovie(movie.id)}
                     className="movie-list_item-button"
                   >
                     <Movie
@@ -70,14 +56,5 @@ class MovieList extends Component {
   }
 }
 
-const mapStateToProps =  state => ({
-  user: state.user,
-  movies: state.movies,
-});
 
-const mapActionsToProps = {
-  onToggleMovie: toggleMovie,
-  onMarkAllUnwatched: markAllUnwatched,
-};
-
-export default connect(mapStateToProps, mapActionsToProps)(MovieList);
+export default MovieList;
