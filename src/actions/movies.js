@@ -41,11 +41,11 @@ export const fetchMovies = () => {
 
 const fetchPage = (pageNumber = 1, results = []) => {
   //lilo
-  const personId = 49265;
+  //const personId = 49265;
   //tyra
   //const personId = 77897;
   // nic cage
-  //const personId = 2963;
+  const personId = 2963;
   const key = process.env.REACT_APP_MOVIEDB;
   const fetchPath = `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=release_date.desc&include_adult=false&page=${pageNumber}&include_video=false&with_people=${personId}`;
   return fetch(fetchPath, {

@@ -10,9 +10,17 @@ import { Provider } from 'react-redux';
 
 require('dotenv').config();
 
-const allStoreEnhancers = compose(
+
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose;
+
+const allStoreEnhancers = composeEnhancers(
   applyMiddleware(thunk),
-  window.devToolsExtension && window.devToolsExtension()
+  // other store enhancers if any
 );
 
 const store = createStore(
