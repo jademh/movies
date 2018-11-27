@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MovieListWrapper from './movielist/MovieListWrapper';
-import './App.css';
 import { connect } from 'react-redux';
 import { fetchMovies } from './actions/movies';
 
