@@ -1,65 +1,64 @@
 import React, { Component } from 'react';
-import Movie from './Movie';
-import { calculatePercentage } from '../helpers/math';
+import MovieFilter from './MovieFilter';
+import MovieResults from './MovieResults';
 
 const MOVIE_API_KEY = process.env.REACT_APP_MOVIEDB;
-
 
 const filters = [
   {
     id: "LOW_TO_HIGH",
-    text: "Low to High"
+    name: "Low to High"
   },
   {
     id: "HIGH_TO_LOW",
-    text: "High to Low"
+    name: "High to Low"
   },
   {
     id: "FRESH",
-    text: "Fresh"
+    name: "Fresh"
   },
   {
     id: "ROTTEN",
-    text: "Rotten"
+    name: "Rotten"
   },
   {
     id: "TENS",
-    text: "Tens across the board"
+    name: "Tens across the board"
   },
 ];
 
 const actors = [
   {
     id: 1920,
-    text: 'Winona Ryder'
+    name: 'Winona Ryder'
   },
   {
     id: 6886,
-    text: 'Christina Ricci'
+    name: 'Christina Ricci'
   },
   {
     id: 2155,
-    text: 'Thora Birch'
+    name: 'Thora Birch'
   },
   {
     id: 2963,
-    text: 'Nicolas Cage'
+    name: 'Nicolas Cage'
   },
   {
     id: 6384,
-    text: 'Keanu Reeves'
+    name: 'Keanu Reeves'
   },
   {
     id: 77897,
-    text: 'Tyra Banks'
+    name: 'Tyra Banks'
   },
   {
     id: 49265,
-    text: 'Lindsay Lohan'
+    name: 'Lindsay Lohan'
   },
   {
     id: 11617,
-    text: 'Mischa Barton'
+    name: 'Mischa Barton'
   },
 ];
 
@@ -74,6 +73,7 @@ export default class MovieList extends Component {
     this.filterMovies = this.filterMovies.bind(this);
     this.fetchMovies = this.fetchMovies.bind(this);
     this.fetchGenres = this.fetchGenres.bind(this);
+    this.clearFilters = this.clearFilters.bind(this);
   }
 
   state = {
@@ -84,6 +84,7 @@ export default class MovieList extends Component {
     dataLoaded: false,
     filter: filters[0].id,
     genreFilter: null,
+    filtersApplied: false,
   }
 
   fetchPage(pageNumber = 1, results = []) {
@@ -155,14 +156,20 @@ export default class MovieList extends Component {
     this.setState({movies});
   }
 
+  clearFilters() {
+    this.setState({genreFilter: this.state.genres[0].id, filter: filters[0].id, filtersApplied: false}, () => {
+      this.filterMovies();
+    });
+  }
+
   onFilter(e) {
-    this.setState({filter: e.target.value}, () => {
+    this.setState({filter: e.target.value, filtersApplied: true}, () => {
       this.filterMovies();
     });
   }
 
   onFilterGenre(e) {
-    this.setState({genreFilter: e.target.value}, () => {
+    this.setState({genreFilter: e.target.value, filtersApplied: true}, () => {
       this.filterMovies();
     });
   }
@@ -206,87 +213,19 @@ export default class MovieList extends Component {
     const movies  = this.state.filteredMovies;
     return (
       <div>
-        <button data-testid="movies-undo" onClick={this.markUnwatched}>Mark All Unwatched</button>
-        
-        <select onChange={this.onActorChange}>
-          {actors.map(actor => {
-            return (
-              <option key={actor.id} value={actor.id} selected={this.state.actor === actor.id}>{actor.text}</option>
-            )
-          })}
-        </select>
+        <div>
+          <MovieFilter filters={actors} activeFilter={this.state.actor} onChange={this.onActorChange} />
+          <MovieFilter filters={filters} activeFilter={this.state.filter} onChange={this.onFilter} />
+          <MovieFilter filters={this.state.genres} activeFilter={this.state.genreFilter} onChange={this.onFilterGenre} />
+        </div>
 
-        <select onChange={this.onFilter}>
-          {filters.map(filter => {
-            return (
-              <option key={filter.id} value={filter.id} selected={this.state.filter === filter.id}>{filter.text}</option>
-            )
-          })}
-        </select>
-
-        <select onChange={this.onFilterGenre}>
-          {this.state.genres.map(genre => {
-            return (
-              <option key={genre.id} value={genre.id} selected={this.state.genreFilter === genre.id}>{genre.name}</option>
-            )
-          })}
-        </select>
+        <div>
+          <button data-testid="movies-undo" onClick={this.markUnwatched}>Mark All Unwatched</button>
+          <button onClick={this.clearFilters} disabled={!this.state.filtersApplied}>Clear Filters</button>
+        </div>
 
         <MovieResults loaded={this.state.dataLoaded} movies={movies} onClick={this.toggleMovie} />
     </div>
     )
   }
-}
-
-
-
-const MovieResults = (props) => {
-  const { loaded, movies, onClick }  = props;
-
-  const totalMovies = movies.length;
-  const seenMovies = movies.filter(movie => movie.watched).length;
-  const percentage = calculatePercentage(seenMovies, totalMovies);
-
-  if(!loaded) {
-    return (
-      <div data-testid="loading">... Loading Movies</div>
-    )
-  }
-  if(movies.length <= 0) {
-    return (
-      <div>No results</div>
-    )
-  }
-  return (
-    <div>
-      <h1>
-          <span data-testid="movies-seen">{seenMovies}</span>
-          <span> / </span>
-          <span data-testid="movies-total">{totalMovies}</span>
-          <span> ... </span>
-          <span data-testid="movies-percentage">{percentage}</span>
-      </h1>
-      <ul className="movie-list">
-      {movies.map((movie) => {
-        return (
-          <li 
-            key={movie.id}
-            className={`movie-list_item ${movie.watched ? 'st-watched' : ''}`}>
-            <button
-              data-testid="movie-button"
-              onClick={() => onClick(movie.id)}
-              className="movie-list_item-button"
-            >
-              <Movie
-                title={movie.title}
-                releaseDate={movie.release_date}
-                posterPath={movie.poster_path}
-              />
-            </button>
-          </li>
-        )
-      })}
-      </ul>
-    </div>
-  );
 }
