@@ -4,6 +4,65 @@ import { calculatePercentage } from '../helpers/math';
 
 const MOVIE_API_KEY = process.env.REACT_APP_MOVIEDB;
 
+
+const filters = [
+  {
+    id: "LOW_TO_HIGH",
+    text: "Low to High"
+  },
+  {
+    id: "HIGH_TO_LOW",
+    text: "High to Low"
+  },
+  {
+    id: "FRESH",
+    text: "Fresh"
+  },
+  {
+    id: "ROTTEN",
+    text: "Rotten"
+  },
+  {
+    id: "TENS",
+    text: "Tens across the board"
+  },
+];
+
+const actors = [
+  {
+    id: 1920,
+    text: 'Winona Ryder'
+  },
+  {
+    id: 6886,
+    text: 'Christina Ricci'
+  },
+  {
+    id: 2155,
+    text: 'Thora Birch'
+  },
+  {
+    id: 2963,
+    text: 'Nicolas Cage'
+  },
+  {
+    id: 6384,
+    text: 'Keanu Reeves'
+  },
+  {
+    id: 77897,
+    text: 'Tyra Banks'
+  },
+  {
+    id: 49265,
+    text: 'Lindsay Lohan'
+  },
+  {
+    id: 11617,
+    text: 'Mischa Barton'
+  },
+];
+
 export default class MovieList extends Component {
   constructor(props) {
     super(props);
@@ -18,13 +77,13 @@ export default class MovieList extends Component {
   }
 
   state = {
-    actor: 2963,
+    actor: actors[0].id,
     movies: [],
     filteredMovies: [],
     genres: [],
     dataLoaded: false,
-    filter: 'LOW_TO_HIGH',
-    genreFilter: 'ALL',
+    filter: filters[0].id,
+    genreFilter: null,
   }
 
   fetchPage(pageNumber = 1, results = []) {
@@ -133,7 +192,8 @@ export default class MovieList extends Component {
     .then(response => response.json())
     .then(data => {
       const genres = data.genres;
-      this.setState({genres});
+      genres.unshift({id: 'ALL', name: 'All Genres'});
+      this.setState({genres, genreFilter: 'ALL'});
     });
   }
 
@@ -149,30 +209,29 @@ export default class MovieList extends Component {
         <button data-testid="movies-undo" onClick={this.markUnwatched}>Mark All Unwatched</button>
         
         <select onChange={this.onActorChange}>
-          <option value="2963">Nicolas Cage</option>
-          <option value="6384">Keanu Reeves</option>
-          <option value="1920">Winona Ryder</option>
-          <option value="77897">Tyra Banks</option>
-          <option value="49265">Lindsay Lohan</option>
-          <option value="11617">Mischa Barton</option>
-        </select>
-
-        <select onChange={this.onFilter}>
-          <option value="LOW_TO_HIGH">Low to High</option>
-          <option value="HIGH_TO_LOW">High to Low</option>
-          <option value="FRESH">Fresh</option>
-          <option value="ROTTEN">Rotten</option>
-          <option value="TENS">Tens across the board</option>
-        </select>
-
-        <select onChange={this.onFilterGenre}>
-          <option value="ALL">All Genres</option>
-          {this.state.genres.map(genre => {
+          {actors.map(actor => {
             return (
-              <option key={genre.id} value={genre.id}>{genre.name}</option>
+              <option key={actor.id} value={actor.id} selected={this.state.actor === actor.id}>{actor.text}</option>
             )
           })}
         </select>
+
+        <select onChange={this.onFilter}>
+          {filters.map(filter => {
+            return (
+              <option key={filter.id} value={filter.id} selected={this.state.filter === filter.id}>{filter.text}</option>
+            )
+          })}
+        </select>
+
+        <select onChange={this.onFilterGenre}>
+          {this.state.genres.map(genre => {
+            return (
+              <option key={genre.id} value={genre.id} selected={this.state.genreFilter === genre.id}>{genre.name}</option>
+            )
+          })}
+        </select>
+
         <MovieResults loaded={this.state.dataLoaded} movies={movies} onClick={this.toggleMovie} />
     </div>
     )
