@@ -1,4 +1,5 @@
 import React from 'react';
+import Select from 'react-select';
 
 const MovieFilter = (props) => {
 
@@ -9,13 +10,9 @@ const MovieFilter = (props) => {
   } = props;
 
   return (
-    <select onChange={onChange}>
-      {filters.map(filter => {
-        return (
-          <option key={filter.id} value={filter.id} selected={activeFilter === filter.id}>{filter.name}</option>
-        )
-      })}
-    </select>
+    <div className="filter">
+      <Select name="Choose Actor" onChange={(val) => onChange(val)} options={filters} value={filters.find(filter => filter.value === activeFilter)} />
+    </div>
   )
 }
 
