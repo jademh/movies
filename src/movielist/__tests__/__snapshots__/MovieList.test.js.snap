@@ -2,91 +2,169 @@
 
 exports[`<MovieList /> 1`] = `
 <div>
-  <h1>
-    <span
-      data-testid="movies-seen"
-    >
-      0
-    </span>
-    <span>
-       / 
-    </span>
-    <span
-      data-testid="movies-total"
-    >
-      3
-    </span>
-    <span>
-       ... 
-    </span>
-    <span
-      data-testid="movies-percentage"
-    >
-      0%
-    </span>
-  </h1>
   <button
     data-testid="movies-undo"
   >
-    Undo
+    Mark All Unwatched
   </button>
-  <ul
-    class="movie-list"
-  >
-    <li
-      class="movie-list_item "
+  <select>
+    <option
+      value="2963"
     >
-      <button
-        class="movie-list_item-button"
-        data-testid="movie-button"
-      >
-        <div
-          data-testid="movie"
-        >
-          <img
-            alt="Hackers"
-            data-testid="movie-poster"
-            src="http://image.tmdb.org/t/p/w185undefined"
-          />
-        </div>
-      </button>
-    </li>
-    <li
-      class="movie-list_item "
+      Nicolas Cage
+    </option>
+    <option
+      value="6384"
     >
-      <button
-        class="movie-list_item-button"
-        data-testid="movie-button"
-      >
-        <div
-          data-testid="movie"
-        >
-          <img
-            alt="Confessions of a teenage Drama Queen"
-            data-testid="movie-poster"
-            src="http://image.tmdb.org/t/p/w185undefined"
-          />
-        </div>
-      </button>
-    </li>
-    <li
-      class="movie-list_item "
+      Keanu Reeves
+    </option>
+    <option
+      value="1920"
     >
-      <button
-        class="movie-list_item-button"
-        data-testid="movie-button"
+      Winona Ryder
+    </option>
+    <option
+      value="77897"
+    >
+      Tyra Banks
+    </option>
+    <option
+      value="49265"
+    >
+      Lindsay Lohan
+    </option>
+    <option
+      value="11617"
+    >
+      Mischa Barton
+    </option>
+  </select>
+  <select>
+    <option
+      value="LOW_TO_HIGH"
+    >
+      Low to High
+    </option>
+    <option
+      value="HIGH_TO_LOW"
+    >
+      High to Low
+    </option>
+    <option
+      value="FRESH"
+    >
+      Fresh
+    </option>
+    <option
+      value="ROTTEN"
+    >
+      Rotten
+    </option>
+    <option
+      value="TENS"
+    >
+      Tens across the board
+    </option>
+  </select>
+  <select>
+    <option
+      value="ALL"
+    >
+      All Genres
+    </option>
+    <option
+      value="1"
+    >
+      Comedy
+    </option>
+    <option
+      value="2"
+    >
+      Action
+    </option>
+  </select>
+  <div>
+    <h1>
+      <span
+        data-testid="movies-seen"
       >
-        <div
-          data-testid="movie"
+        0
+      </span>
+      <span>
+         / 
+      </span>
+      <span
+        data-testid="movies-total"
+      >
+        3
+      </span>
+      <span>
+         ... 
+      </span>
+      <span
+        data-testid="movies-percentage"
+      >
+        0%
+      </span>
+    </h1>
+    <ul
+      class="movie-list"
+    >
+      <li
+        class="movie-list_item "
+      >
+        <button
+          class="movie-list_item-button"
+          data-testid="movie-button"
         >
-          <img
-            alt="Clueless"
-            data-testid="movie-poster"
-            src="http://image.tmdb.org/t/p/w185undefined"
-          />
-        </div>
-      </button>
-    </li>
-  </ul>
+          <div
+            data-testid="movie"
+          >
+            <img
+              alt="Hackers"
+              data-testid="movie-poster"
+              src="http://image.tmdb.org/t/p/w185undefined"
+            />
+          </div>
+        </button>
+      </li>
+      <li
+        class="movie-list_item "
+      >
+        <button
+          class="movie-list_item-button"
+          data-testid="movie-button"
+        >
+          <div
+            data-testid="movie"
+          >
+            <img
+              alt="Confessions of a teenage Drama Queen"
+              data-testid="movie-poster"
+              src="http://image.tmdb.org/t/p/w185undefined"
+            />
+          </div>
+        </button>
+      </li>
+      <li
+        class="movie-list_item "
+      >
+        <button
+          class="movie-list_item-button"
+          data-testid="movie-button"
+        >
+          <div
+            data-testid="movie"
+          >
+            <img
+              alt="Clueless"
+              data-testid="movie-poster"
+              src="http://image.tmdb.org/t/p/w185undefined"
+            />
+          </div>
+        </button>
+      </li>
+    </ul>
+  </div>
 </div>
 `;

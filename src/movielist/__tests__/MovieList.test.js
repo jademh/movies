@@ -1,8 +1,6 @@
 import React from 'react';
 import { render, cleanup, fireEvent, waitForElement } from 'react-testing-library';
-
 import MovieList from '../MovieList';
-import { debug } from 'util';
 
 global.fetch = require('jest-fetch-mock');
 
@@ -14,7 +12,6 @@ afterEach(() => {
 console.error = jest.fn();
 
 const movies = {
-  success: true,
   results: [
     {
       id: 1,
@@ -37,9 +34,24 @@ const movies = {
   ],
 };
 
+const genres = {
+  genres: [
+    {
+      id: 1,
+      name: 'Comedy'
+    },
+    {
+      id: 2,
+      name: "Action"
+    }
+  ]
+}
+
 
 test('<MovieList />', async () => {
-  fetch.mockResponseOnce(JSON.stringify(movies));
+  fetch
+    .mockResponseOnce(JSON.stringify(movies))
+    .mockResponseOnce(JSON.stringify(genres));
   const { getByTestId, queryByTestId, getAllByTestId, container } = render(
       <MovieList />
   );
