@@ -1,6 +1,7 @@
 import React from 'react';
 import Movie from './Movie';
 import { calculatePercentage } from '../helpers/math';
+import './css/movielist.scss';
 
 const MovieResults = (props) => {
   const { loaded, movies, onClick, actorName, genres, genre }  = props;
@@ -16,17 +17,17 @@ const MovieResults = (props) => {
 
   if(!loaded) {
     return (
-      <div className="loading" data-testid="loading">... Loading Movies</div>
+      <div className="movie-list_loading" data-testid="loading">... Loading Movies</div>
     )
   }
   if(movies.length <= 0) {
     return (
-      <div className="loading">No results</div>
+      <div className="movie-list_loading">No results</div>
     )
   }
   return (
     <div>
-      <h1>
+      <h1 className="movie-list_summary">
           <span>I have seen </span>
           <span data-testid="movies-seen">{seenMovies}</span>
           <span>/</span>

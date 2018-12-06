@@ -1,0 +1,48 @@
+.nav {
+  background: white;
+  position: sticky;
+  top: 0;
+  padding: 10px 0;
+  z-index: 10;
+}
+
+.filterGroup {
+  display: flex;
+  @media only screen and (max-width: 700px) {
+    flex-wrap: wrap;
+  }
+}
+
+.filter {
+  width: 100%;
+  padding: 0 10px;
+  @media only screen and (max-width: 700px) {
+    margin-bottom: 10px;
+  }
+}
+
+.actionGroup {
+  padding: 10px;
+  text-align: right;
+  button {
+    background: lightcoral;
+    border: 0;
+    border-radius: 3px;
+    height: 30px;
+    font-size: 15px;
+    margin-left: 10px;
+    color: white;
+    padding: 0 10px;
+    cursor: pointer;
+    transition: opacity 300ms ease-in-out;
+    &:hover:not(:disabled) {
+      opacity: 0.8;
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    
+    }
+  }
+}

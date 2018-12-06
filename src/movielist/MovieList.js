@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import MovieFilter from './MovieFilter';
 import MovieResults from './MovieResults';
 import Autosuggest from 'react-autosuggest';
+import './css/nav.scss';
+import './css/autosuggest.scss';
 
 const MOVIE_API_KEY = process.env.REACT_APP_MOVIEDB;
 

@@ -1,0 +1,85 @@
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 50px 0;
+  &_item {
+    width: 33.33333%;
+    overflow: hidden;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    background: #eee;
+    padding-top: 46%;
+    overflow: hidden;
+    position: relative;
+    transition: all 300ms ease-in-out;
+    @media only screen and (min-width: 700px) {
+        width: 25%;
+        padding-top: 36%;
+    }
+    @media only screen and (min-width: 900px) {
+      width: 20%;
+      padding-top: 29%
+    }
+    @media only screen and (min-width: 1200px) {
+      width: 10%;
+      padding-top: 14%;
+    }
+    &.st-watched {
+      opacity: 0.2;
+    }
+    img {
+      width: 100%;
+    }
+    
+    &-button {
+      background: none;
+      border: 0;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+  &_loading {
+    text-align: center;
+    margin: 100px 0;
+  }
+  &_summary {
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    padding: 10px;
+    background: lightcoral;
+    color: white;
+    font-weight: normal;
+    bottom: 0;
+    padding: 10px 5%;
+    margin: 0;
+    font-size: 20px;
+    right: 0;
+    left: 0;
+    z-index: 10;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
