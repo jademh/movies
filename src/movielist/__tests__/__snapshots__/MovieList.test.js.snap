@@ -2,96 +2,273 @@
 
 exports[`<MovieList /> 1`] = `
 <div>
-  <button
-    data-testid="movies-undo"
+  <div
+    class="nav"
   >
-    Mark All Unwatched
-  </button>
-  <select>
-    <option
-      value="2963"
+    <div
+      class="filterGroup"
     >
-      Nicolas Cage
-    </option>
-    <option
-      value="6384"
+      <div
+        class="filter"
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-owns="react-autowhatever-1"
+          class="react-autosuggest__container"
+          role="combobox"
+        >
+          <input
+            aria-autocomplete="list"
+            aria-controls="react-autowhatever-1"
+            autocomplete="off"
+            class="react-autosuggest__input"
+            placeholder="Search for a person..."
+            type="text"
+            value=""
+          />
+          <div
+            class="react-autosuggest__suggestions-container"
+            id="react-autowhatever-1"
+            role="listbox"
+          />
+        </div>
+      </div>
+      <div
+        class="filter"
+      >
+        <div
+          class="css-10nd86i"
+        >
+          <div
+            class="css-vj8t7z"
+          >
+            <div
+              class="css-1hwfws3"
+            >
+              <div
+                class="css-xp4uvy"
+              >
+                Sort by: Recently Released
+              </div>
+              <div
+                class="css-1g6gooi"
+              >
+                <div
+                  class=""
+                  style="display: inline-block;"
+                >
+                  <input
+                    aria-autocomplete="list"
+                    autocapitalize="none"
+                    autocomplete="off"
+                    autocorrect="off"
+                    id="react-select-2-input"
+                    spellcheck="false"
+                    style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
+                    tabindex="0"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="css-1wy0on6"
+            >
+              <span
+                class="css-d8oujb"
+              />
+              <div
+                aria-hidden="true"
+                class="css-1ep9fjw"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="css-19bqh2r"
+                  focusable="false"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  width="20"
+                >
+                  <path
+                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="filter"
+      >
+        <div
+          class="css-10nd86i"
+        >
+          <div
+            class="css-vj8t7z"
+          >
+            <div
+              class="css-1hwfws3"
+            >
+              <div
+                class="css-xp4uvy"
+              >
+                Filter by rating
+              </div>
+              <div
+                class="css-1g6gooi"
+              >
+                <div
+                  class=""
+                  style="display: inline-block;"
+                >
+                  <input
+                    aria-autocomplete="list"
+                    autocapitalize="none"
+                    autocomplete="off"
+                    autocorrect="off"
+                    id="react-select-3-input"
+                    spellcheck="false"
+                    style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
+                    tabindex="0"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="css-1wy0on6"
+            >
+              <span
+                class="css-d8oujb"
+              />
+              <div
+                aria-hidden="true"
+                class="css-1ep9fjw"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="css-19bqh2r"
+                  focusable="false"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  width="20"
+                >
+                  <path
+                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="filter"
+      >
+        <div
+          class="css-10nd86i"
+        >
+          <div
+            class="css-vj8t7z"
+          >
+            <div
+              class="css-1hwfws3"
+            >
+              <div
+                class="css-xp4uvy"
+              >
+                All Genres
+              </div>
+              <div
+                class="css-1g6gooi"
+              >
+                <div
+                  class=""
+                  style="display: inline-block;"
+                >
+                  <input
+                    aria-autocomplete="list"
+                    autocapitalize="none"
+                    autocomplete="off"
+                    autocorrect="off"
+                    id="react-select-4-input"
+                    spellcheck="false"
+                    style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
+                    tabindex="0"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="css-1wy0on6"
+            >
+              <span
+                class="css-d8oujb"
+              />
+              <div
+                aria-hidden="true"
+                class="css-1ep9fjw"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="css-19bqh2r"
+                  focusable="false"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  width="20"
+                >
+                  <path
+                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="actionGroup"
     >
-      Keanu Reeves
-    </option>
-    <option
-      value="1920"
-    >
-      Winona Ryder
-    </option>
-    <option
-      value="77897"
-    >
-      Tyra Banks
-    </option>
-    <option
-      value="49265"
-    >
-      Lindsay Lohan
-    </option>
-    <option
-      value="11617"
-    >
-      Mischa Barton
-    </option>
-  </select>
-  <select>
-    <option
-      value="LOW_TO_HIGH"
-    >
-      Low to High
-    </option>
-    <option
-      value="HIGH_TO_LOW"
-    >
-      High to Low
-    </option>
-    <option
-      value="FRESH"
-    >
-      Fresh
-    </option>
-    <option
-      value="ROTTEN"
-    >
-      Rotten
-    </option>
-    <option
-      value="TENS"
-    >
-      Tens across the board
-    </option>
-  </select>
-  <select>
-    <option
-      value="ALL"
-    >
-      All Genres
-    </option>
-    <option
-      value="1"
-    >
-      Comedy
-    </option>
-    <option
-      value="2"
-    >
-      Action
-    </option>
-  </select>
+      <button
+        data-testid="movies-undo"
+      >
+        Mark All Unwatched
+      </button>
+      <button
+        disabled=""
+      >
+        Clear Filters
+      </button>
+    </div>
+  </div>
   <div>
     <h1>
+      <span>
+        I have seen 
+      </span>
       <span
         data-testid="movies-seen"
       >
         0
       </span>
       <span>
-         / 
+        /
       </span>
       <span
         data-testid="movies-total"
@@ -99,12 +276,19 @@ exports[`<MovieList /> 1`] = `
         3
       </span>
       <span>
-         ... 
+         
+         
+        
+         movies
       </span>
-      <span
-        data-testid="movies-percentage"
-      >
-        0%
+      <span>
+         (
+        <span
+          data-testid="movies-percentage"
+        >
+          0%
+        </span>
+        )
       </span>
     </h1>
     <ul
@@ -123,7 +307,7 @@ exports[`<MovieList /> 1`] = `
             <img
               alt="Hackers"
               data-testid="movie-poster"
-              src="http://image.tmdb.org/t/p/w185undefined"
+              src="http://image.tmdb.org/t/p/w300undefined"
             />
           </div>
         </button>
@@ -141,7 +325,7 @@ exports[`<MovieList /> 1`] = `
             <img
               alt="Confessions of a teenage Drama Queen"
               data-testid="movie-poster"
-              src="http://image.tmdb.org/t/p/w185undefined"
+              src="http://image.tmdb.org/t/p/w300undefined"
             />
           </div>
         </button>
@@ -159,7 +343,7 @@ exports[`<MovieList /> 1`] = `
             <img
               alt="Clueless"
               data-testid="movie-poster"
-              src="http://image.tmdb.org/t/p/w185undefined"
+              src="http://image.tmdb.org/t/p/w300undefined"
             />
           </div>
         </button>

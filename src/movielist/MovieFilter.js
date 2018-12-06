@@ -11,7 +11,7 @@ const MovieFilter = (props) => {
 
   return (
     <div className="filter">
-      <Select name="Choose Actor" onChange={(val) => onChange(val)} options={filters} value={filters.find(filter => filter.value === activeFilter)} />
+      <Select onChange={(val) => onChange(val)} options={filters} value={filters.find(filter => filter.value === activeFilter)} />
     </div>
   )
 }

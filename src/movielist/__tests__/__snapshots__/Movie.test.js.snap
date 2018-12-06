@@ -19,7 +19,7 @@ exports[`<Movie /> with no release date 1`] = `
   <img
     alt="Hackers"
     data-testid="movie-poster"
-    src="http://image.tmdb.org/t/p/w185/image.jpg"
+    src="http://image.tmdb.org/t/p/w300/image.jpg"
   />
 </div>
 `;
@@ -31,7 +31,7 @@ exports[`<Movie /> with poster and release date 1`] = `
   <img
     alt="Hackers (1995)"
     data-testid="movie-poster"
-    src="http://image.tmdb.org/t/p/w185/image.jpg"
+    src="http://image.tmdb.org/t/p/w300/image.jpg"
   />
 </div>
 `;

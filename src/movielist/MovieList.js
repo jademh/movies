@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MovieFilter from './MovieFilter';
 import MovieResults from './MovieResults';
+import Autosuggest from 'react-autosuggest';
 
 const MOVIE_API_KEY = process.env.REACT_APP_MOVIEDB;
 
@@ -42,45 +43,6 @@ const filters = [
   },
 ];
 
-const actors = [
-  {
-    value: 1920,
-    label: 'Winona Ryder'
-  },
-  {
-    value: 6886,
-    label: 'Christina Ricci'
-  },
-  {
-    value: 38225,
-    label: 'Cher'
-  },
-  {
-    value: 2155,
-    label: 'Thora Birch'
-  },
-  {
-    value: 2963,
-    label: 'Nicolas Cage'
-  },
-  {
-    value: 6384,
-    label: 'Keanu Reeves'
-  },
-  {
-    value: 77897,
-    label: 'Tyra Banks'
-  },
-  {
-    value: 49265,
-    label: 'Lindsay Lohan'
-  },
-  {
-    value: 11617,
-    label: 'Mischa Barton'
-  },
-];
-
 export default class MovieList extends Component {
   constructor(props) {
     super(props);
@@ -88,29 +50,33 @@ export default class MovieList extends Component {
     this.markUnwatched = this.markUnwatched.bind(this);
     this.onFilter = this.onFilter.bind(this);
     this.onFilterGenre = this.onFilterGenre.bind(this);
-    this.onActorChange = this.onActorChange.bind(this);
     this.onSort = this.onSort.bind(this);
     this.filterMovies = this.filterMovies.bind(this);
     this.fetchMovies = this.fetchMovies.bind(this);
     this.fetchGenres = this.fetchGenres.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
+    this.onActorChange = this.onActorChange.bind(this);
+    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
+    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
   }
 
   state = {
-    actor: actors[0].value,
+    actor: {},
+    actorField: '',
+    actorSuggestions: [],
+    dataLoaded: false,
     movies: [],
     filteredMovies: [],
     genres: [],
-    dataLoaded: false,
     filter: filters[0].value,
     sortOrder: sortFilters[0].value,
-    genreFilter: null,
+    genreFilter: 'ALL',
     filtersApplied: false,
   }
 
   fetchPage(pageNumber = 1, results = []) {
     const {actor} = this.state;
-    const fetchPath = `https://api.themoviedb.org/3/discover/movie?api_key=${MOVIE_API_KEY}&language=en-US&sort_by=release_date.desc&include_adult=false&page=${pageNumber}&include_video=false&with_people=${actor}`;
+    const fetchPath = `https://api.themoviedb.org/3/discover/movie?api_key=${MOVIE_API_KEY}&language=en-US&sort_by=release_date.desc&include_adult=false&page=${pageNumber}&include_video=false&with_people=${actor.id}`;
     return fetch(fetchPath)
     .then((response) => response.json())
     .then((data) => {
@@ -197,32 +163,38 @@ export default class MovieList extends Component {
   }
 
   clearFilters() {
-    this.setState({genreFilter: this.state.genres[0].value, filter: filters[0].value, filtersApplied: false}, () => {
+    this.setState({
+      genreFilter: this.state.genres[0].value,
+      filter: filters[0].value,
+      filtersApplied: false
+    }, () => {
       this.filterMovies();
     });
   }
 
   onFilter(val) {
-    this.setState({filter: val.value, filtersApplied: true}, () => {
+    this.setState({
+      filter: val.value,
+      filtersApplied: true
+    }, () => {
       this.filterMovies();
     });
   }
 
   onFilterGenre(val) {
-    this.setState({genreFilter: val.value, filtersApplied: true}, () => {
+    this.setState({
+      genreFilter: val.value,
+      filtersApplied: true
+    }, () => {
       this.filterMovies();
     });
   }
 
   onSort(val) {
-    this.setState({sortOrder: val.value}, () => {
+    this.setState({
+      sortOrder: val.value
+    }, () => {
       this.filterMovies();
-    });
-  }
-
-  onActorChange(val) {
-    this.setState({actor: val.value}, () => {
-      this.fetchMovies();
     });
   }
 
@@ -256,6 +228,44 @@ export default class MovieList extends Component {
     });
   }
 
+  onActorChange = (event, { newValue }) => {
+    this.setState({
+      actorField: newValue,
+    });
+  };
+
+  onSuggestionSelected = (event, { suggestion } ) => {
+    this.setState({actor: {id: suggestion.id, name: suggestion.name}}, () => {
+      this.fetchMovies();
+    })
+  }
+
+  onSuggestionsFetchRequested = ({ value }) => {
+    let actorSuggestions = [];
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+    if(inputLength === 0) {
+      this.setState({actorSuggestions});
+      return;
+    }
+  
+    const searchPath = `https://api.themoviedb.org/3/search/person?api_key=${MOVIE_API_KEY}&language=en-US&query=${inputValue}&page=1&include_adult=false`;  
+    fetch(searchPath)
+    .then(response => response.json())
+    .then(data => {
+      actorSuggestions = data.results;
+      if(actorSuggestions.length > 5) {
+        actorSuggestions.length = 5;
+      }
+      this.setState({actorSuggestions});
+    })
+  
+  };
+
+  onSuggestionsClearRequested = () => {
+    this.setState({ actorSuggestions: [] });
+  };
+
   componentDidMount() {
     this.fetchMovies();
     this.fetchGenres();
@@ -263,29 +273,52 @@ export default class MovieList extends Component {
   
   render() {
     const movies  = this.state.filteredMovies;
+
+    const { 
+      actor,
+      actorSuggestions,
+      actorField,
+      sortOrder,
+      filter,
+      genreFilter,
+      genres,
+      filtersApplied,
+      dataLoaded,
+    } = this.state;
+
     return (
       <div>
         <div className="nav">
           <div className="filterGroup">
-            <MovieFilter filters={actors} activeFilter={this.state.actor} onChange={this.onActorChange} />
-            <MovieFilter filters={sortFilters} activeFilter={this.state.sortOrder} onChange={this.onSort} />
-            <MovieFilter filters={filters} activeFilter={this.state.filter} onChange={this.onFilter} />
-            <MovieFilter filters={this.state.genres} activeFilter={this.state.genreFilter} onChange={this.onFilterGenre} />
+            <div className="filter">
+              <Autosuggest
+                suggestions={actorSuggestions}
+                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                onSuggestionSelected={this.onSuggestionSelected}
+                getSuggestionValue={suggestion => suggestion.name}
+                renderSuggestion={suggestion => (<span>{suggestion.name}</span>)}
+                inputProps={{placeholder: 'Search for a person...', value: actorField, onChange: this.onActorChange}}
+              />
+            </div>
+            <MovieFilter filters={sortFilters} activeFilter={sortOrder} onChange={this.onSort} />
+            <MovieFilter filters={filters} activeFilter={filter} onChange={this.onFilter} />
+            <MovieFilter filters={genres} activeFilter={genreFilter} onChange={this.onFilterGenre} />
           </div>
 
           <div className="actionGroup">
             <button data-testid="movies-undo" onClick={this.markUnwatched}>Mark All Unwatched</button>
-            <button onClick={this.clearFilters} disabled={!this.state.filtersApplied}>Clear Filters</button>
+            <button onClick={this.clearFilters} disabled={!filtersApplied}>Clear Filters</button>
           </div>
         </div>
 
         <MovieResults
-          loaded={this.state.dataLoaded}
+          loaded={dataLoaded}
           movies={movies}
           onClick={this.toggleMovie}
-          actorName={actors.find(actor => this.state.actor === actor.value).label}
-          genres={this.state.genres}
-          genre={this.state.genreFilter}
+          actorName={actor.name}
+          genres={genres}
+          genre={genreFilter}
           />
     </div>
     )
